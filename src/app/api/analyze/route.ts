@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { FormData, AnalysisResult } from '@/types'
-import { parseSupplementList, sanitizeInput } from '@/lib/utils'
+import { sanitizeInput } from '@/lib/utils'
 
 // This is a mock implementation. In a real application, this would query
 // external databases and APIs for actual supplement interaction data.
@@ -8,7 +8,8 @@ export async function POST(request: Request) {
   try {
     const body: FormData = await request.json()
     
-    const supplements = parseSupplementList(sanitizeInput(body.supplements))
+    // Sanitize input but don't parse yet since this is a mock
+    sanitizeInput(body.supplements)
     
     // Mock response with broader range of sources
     const mockResult: AnalysisResult = {
