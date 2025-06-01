@@ -4,6 +4,7 @@ A trusted, evidence-based application for checking supplement interactions, cont
 
 ## Features
 
+### Frontend
 - Free-text supplement and lifestyle input
 - Adaptive questionnaire for personalized results
 - Evidence-based interaction checking
@@ -12,20 +13,32 @@ A trusted, evidence-based application for checking supplement interactions, cont
 - Clinician-grade information
 - HIPAA-aligned security
 
+### Backend API
+- Queries PubMed API for studies about supplement interactions
+- Uses OpenAI to analyze and summarize the research
+- Provides structured analysis of potential interactions
+- Includes strength of evidence and safety recommendations
+
 ## Tech Stack
 
+### Frontend
 - Next.js 14 with App Router
 - TypeScript
 - Tailwind CSS
-- Prisma
 - React Query
 - Zod
 - HeadlessUI
 - React Hook Form
 
+### Backend
+- Python 3.9+
+- AWS Lambda
+- OpenAI API
+- PubMed API
+
 ## Getting Started
 
-1. Install dependencies:
+1. Install frontend dependencies:
    ```bash
    yarn install
    ```
@@ -34,6 +47,8 @@ A trusted, evidence-based application for checking supplement interactions, cont
    ```bash
    cp .env.example .env.local
    ```
+   Required variables:
+   - `OPENAI_API_KEY`: Your OpenAI API key
 
 3. Run the development server:
    ```bash
@@ -42,13 +57,34 @@ A trusted, evidence-based application for checking supplement interactions, cont
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Development
+## Project Structure
 
-- `src/app/*` - App router pages and layouts
-- `src/components/*` - Reusable React components
-- `src/lib/*` - Utility functions and shared logic
-- `src/types/*` - TypeScript type definitions
-- `src/styles/*` - Global styles and Tailwind configuration
+```
+supplements-project/
+├── src/                    # Frontend source code
+│   ├── app/               # Next.js app router pages
+│   ├── components/        # React components
+│   ├── lib/              # Utility functions
+│   └── types/            # TypeScript definitions
+├── api/                   # Backend Lambda function
+│   ├── __init__.py
+│   ├── lambda_function.py
+│   └── utils/
+│       ├── pubmed.py
+│       └── openai_utils.py
+├── tests/                 # Test files
+└── README.md
+```
+
+## API Usage
+
+The backend API accepts POST requests with the following JSON body:
+```json
+{
+    "supplement_1": "Vitamin C",
+    "supplement_2": "Iron"
+}
+```
 
 ## Security & Privacy
 
